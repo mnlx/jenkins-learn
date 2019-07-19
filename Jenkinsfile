@@ -1,13 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Deploy') {
             steps {
-
                 retry(3) {
                     sh './flakey.sh'
                 }
-
                 timeout(time: 10, unit: 'SECONDS') {
                     sh 'go run init.go'
                     sh '''
