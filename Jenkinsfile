@@ -17,4 +17,16 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            echo 'Stages completed.'
+        }
+        success {
+            echo 'That went well.'
+        }
+        failure {
+            echo 'That didnt go to well.'
+        }
+    }
 }
