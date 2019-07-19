@@ -4,6 +4,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 retry(3) {
+                    sh 'chmod +x flakey.sh'
                     sh './flakey.sh'
                 }
                 timeout(time: 10, unit: 'SECONDS') {
