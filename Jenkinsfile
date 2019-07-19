@@ -3,7 +3,18 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'go run init.go'
+
+                retry(3) {
+                    sh './flakey.sh'
+                }
+
+                timeout(time: 10, unit: 'SECONDS') {
+                    sh 'go run init.go'
+                    sh '''
+                        echo "This is working"
+                        ls -lah
+                    '''
+                }
             }
         }
     }
